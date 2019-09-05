@@ -1,17 +1,27 @@
 <?php
-	for ($number = 1 ; $number<= 100 ;$number ++) {
+use PHPUnit\Framework\TestCase;
+Class NumberPrintTest extends TestCase {
+	public function numberPrint($number) {
 		switch ($number) {
 		    case $number % 3 === 0 && $number % 5 === 0:
-		        echo "Linianos\n";
-		        break;
+		        return "Linianos";
 		    case $number % 3 === 0:
-		        echo "Linio\n";
-		        break;
+		        return "Linio";
 		    case $number % 5 === 0:
-		        echo "IT\n";
-		        break;
+		        return "IT";
 		    default:
-		        echo $number."\n";
+		        return $number;
 		}
 	}
+	/**
+     * @dataProvider numTotalPrint
+     */
+	public function testNumbers($i, $result) {
+		$this->assertSame($result, $this->numberPrint($i));
+	}
+	public function numTotalPrint()
+	{
+		return [[7, 7],[15, "Linianos"], [5, "IT"], [3, "Linio"], [3, "Linios"]];
+	}
+}
 ?>
